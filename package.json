@@ -1,0 +1,9 @@
+{
+  "name": "view",
+  "version": "0.1.0",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.7"
+  }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>view.js example</title>
+    </head>
+    <body>
+        <h1>view.js example</h1>
+        <header>
+            <nav>
+                <button onclick="view('#home')">Home</button>
+                <button onclick="view('#settings')">Settings</button>
+                <button onclick="view('#help')">Help</button>
+            </nav>
+        </header>
+        <div class="main">
+            <section id="home">
+                <h1>Home</h1>
+                <button disabled>Prev</button>
+                <button onclick="view('#settings')">Next</button>
+            </section>
+            <section id="settings" hidden>
+                <h1>Settings <span id="details"></span></h1>
+                <button onclick="view('#home')">Prev</button>
+                <button onclick="view('#help')">Next</button>
+            </section>
+            <section id="help" hidden>
+                <h1>Help</h1>
+                <button onclick="view('#settings')">Prev</button>
+                <button disabled>Next</button>
+            </section>
+        </div>
+        <p>
+            <button onclick="view('section')">Show All</button>
+        </p>
+        <script src="../view.min.js"></script>
+    </body>
+</html>
