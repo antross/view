@@ -32,6 +32,11 @@
             _iterate(targets, _show, root, options);
         };
         
+        // Toggle the visibility of elements without affecting siblings.
+        view.toggle = function (targets, options) {
+            _iterate(targets, _toggle, root, options);
+        };
+        
         // Obtain a `view` scoped to a given root.
         view.scope = function(root) {
             // Verify root can contain and query elements
@@ -100,6 +105,15 @@
             [].forEach.call(target.querySelectorAll('[hidden] ~ :not([hidden])'), function(item) {
                 _notify(item, 'view:show');
             });
+        }
+    }
+    
+    // Toggle the visibility of the target element
+    function _toggle(target, targets, data) {
+        if (target.hasAttribute(_hidden)) {
+            _show(target, targets, data);
+        } else {
+            _hide(target, targets, data);
         }
     }
     
