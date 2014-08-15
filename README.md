@@ -13,8 +13,8 @@ Define your initial view via HTML5's `hidden` attribute.
 
 ```html
 <div id="pages">
-  <div id="home"></div>
-  <div id="about" hidden></div>
+  <div id="home" class="page"></div>
+  <div id="about" class="page" hidden></div>
 </div>
 ```
   
@@ -37,12 +37,12 @@ Children with the same parent are grouped together.
 
 ```html
 <header>
-  <h1 class="home">Home</h1>
-  <h1 class="about" hidden>About</h1>
+  <h1 class="home title">Home</h1>
+  <h1 class="about title" hidden>About</h1>
 </header>
 <div id="pages">
-  <div class="home"></div>
-  <div class="about" hidden></div>
+  <div class="home page"></div>
+  <div class="about page" hidden></div>
 </div>
 ```
 
@@ -57,6 +57,17 @@ Or separately if you wish.
 ```javascript
 view('header > .about'); // Switch to the "about" header
 view('#pages > .about'); // Switch to the "about" page
+```
+
+Popups
+------
+
+Update elements leaving siblings untouched using the popup APIs.
+
+```javascript
+view.show('#alert'); // Show alert without hiding siblings
+view.hide('#alert'); // Hide alert without showing anything else
+view.toggle('#alert'); // Toggle visibility of alert
 ```
 
 Events
@@ -77,6 +88,27 @@ Provided data is only passed to explicitly matched elements.
 view(targets, {data: data}); // Populate `evt.detail.data`
 ```
 
+Scoping
+-------
+
+Confine future matches to a specified sub-tree using a scoped `view` instance.
+
+```html
+<div id="widget1">
+	<div class="page1"></div>
+	<div class="page2" hidden></div>
+</div>
+<div id="widget2">
+	<div class="page1"></div>
+	<div class="page2" hidden></div>
+</div>
+```
+
+```javascript
+var _view = view.scope("#widget1"); // Get a view scoped to "widget1"
+_view(".page2"); // Switch to "page2" in "widget1", but not in "widget2"
+```
+
 Animations
 ----------
 
@@ -84,9 +116,13 @@ Want to animate changes with CSS Transitions or Animations?
 Try `visibility: hidden` instead of `display: none`.
 
 ```css
-  #pages > [hidden] {
-    animation: fade-out 0.3s both;
+  .page {
+    transition-duration: 0.3s;
+	transition-property: opacity, visibility;
+  }
+  .page[hidden] {
     display: block;
+	opacity: 0;
     visibility: hidden;
   }
 ```
