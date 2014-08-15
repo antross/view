@@ -2,7 +2,7 @@
  * view.js
  * Swap visible elements in a single call.
  * 
- * Copyright (c) 2013 Tony Ross
+ * Copyright (c) 2013-2014 Tony Ross
  * Released under the MIT license
  * http://github.com/antross/view
  */
