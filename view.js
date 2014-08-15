@@ -127,5 +127,7 @@
     
     // Expose the `view` function globally and via AMD if available
     var view = win.view = _scope(doc);
-    if(win.define) win.define(function(){ return view });
+    if(typeof define === "function") {
+        define(function(){ return view });
+    }
 })(this, this.document);
