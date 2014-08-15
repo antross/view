@@ -75,7 +75,7 @@
         // Disambiguate target formats to produce a list of target references
         if(typeof targets == 'string') {
             targets = _find(targets, root);
-        } else if(!targets.length) {
+        } else if(!targets.length || targets instanceof Element) {
             targets = [targets];
         }
         // Iterate and call our provided function on each matched target
